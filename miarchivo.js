@@ -1,18 +1,35 @@
-let answer = prompt(`Deseas realizar una compra?:
+function saludar(nombre = "usuario", apellido = " "){
+    alert(`Hola ${nombre} ${apellido}, bienvenido a "Mi tienda Online" `);
+}
 
+saludar();
+
+
+function solicitarAnswer(){
+const answer = prompt(`Deseas realizar una compra?:
 1: Si
 2: No
-
 `);
 
-alert ("Has respondido que: " + answer)
+if (answer == 1) {
+    alert ("Has respondido que Si");
+
+} else if(answer == 2) {
+    alert ("Has respodido que No. Gracias por visitar Mi tienda online");
+
+} else {
+    alert ("error al ingresar respuesta")    
+}
+console.log(answer)
+}
+
+solicitarAnswer();
 
 
-let option = prompt(`Elija un producto:
+const option = prompt(`Elija un producto: 
 remera 
 pantalon 
 campera 
-
 `);
 
 let precio1 = 2500;
@@ -23,16 +40,16 @@ alert ("Has elegido: " + option)
 
 switch (option){
     case "remera":
-        prompt(`producto ${option} = $ ${precio1} `);
+        alert(`producto ${option} = $ ${precio1} `);
         break;
     case "pantalon":
-        prompt(`producto ${option}, = $ ${precio2}`);
+        alert(`producto ${option} = $ ${precio2}`);
         break;
     case "campera":
-        prompt(`producto ${option}, = $ ${precio3}`);
+        alert(`producto ${option} = $ ${precio3}`);
         break;
     default:
-        prompt("No ingresaste ningun producto");
+        alert("No ingresaste ningun producto valido");
         break;
 } 
 
@@ -76,5 +93,38 @@ function credito(precio,cuotas){
 
 }
 
+
+const nombre = "Remera";
+const valor = 2500;
+const disponible = true;
+
+
+//Object constructor
+
+const producto = {
+    nombre: "Remera",
+    valor: 2500,
+    disponible: true,
+};
+
+function Producto(nombre, valor){
+    this.nombre = nombre;
+    this.valor = valor;
+    this.disponible = true;
+}
+
+const producto2= new Producto("Pantalon, 3800");
+const producto3= new Producto ("Campera, 4500");
+
+console.log(producto,producto2,producto3)
+
+const carrito = [
+    { producto: 'Remera', precio: 2500},
+    { producto: 'Pantalon', precio: 3800},
+    { producto: 'Campera', precio: 4500},
+   
+];
+
+console.log(carrito);
 
 
