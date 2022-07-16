@@ -2,6 +2,7 @@
 function saludar(){
  
     const nombreUsuario = prompt(`Ingrese su nombre`);
+    
     if(isNaN(nombreUsuario) && nombreUsuario.trim() !== ""){
         alert(`Hola ${nombreUsuario} bienvenido a "Mi tienda Online" `);
     } else {
@@ -20,8 +21,10 @@ const answer = parseInt(prompt(`Deseas realizar una compra?:
 `));
 if (answer === 1) {
     alert ("Has respondido que Si");
+    elegirProducto()
 } else if(answer === 2) {
     alert ("Has respodido que No. Gracias por visitar Mi tienda online");
+    
 } else {
     alert ("error al ingresar respuesta")
     responderSiDeseaComprar();    
