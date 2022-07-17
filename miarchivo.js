@@ -1,100 +1,109 @@
-const arrayProductos=[];
-const arrayCarrito =[];
-const prenda= prenda
+let arrayProducts = []
+let arrayCarts = []
+let cantidadDeProductos = arrayProducts.length
+let divProductos = document.getElementById("div-productos")
 
-
-class Producto{
-    constructor(nombre, precio, stock) {
-        this.precio = precio;
-        this.stock = stock;
-        this.nombre = nombre;
+class Product {
+    constructor(name, price, stock) {
+        this.name = name
+        this.price = price
+        this.stock = stock
     }
 }
-class Carrito{
-  constructor(nombre, precio) {
-      this.precio = precio;
-      this.nombre = nombre;
-  }
+
+class ToCart {
+    constructor(name, price) {
+        this.name = name
+        this.price = price
+    }
 }
 
-let j=0;
-arrayProductos[j++]= new Producto("Remera", 2500, 5);
-arrayProductos[j++]= new Producto("Pantalon", 3800, 4);
-arrayProductos[j++]= new Producto("Campera", 4500, 2);
+let product1 = new Product("remera", 2500, 15)
+let product2 = new Product("pantalon", 3800, 8)
+let product3 = new Product("campera", 4500, 7)
 
 
-function seleccionCarrito(prenda) {
-  switch (prenda) {
-    case 0:
-      if (arrayProductos[prenda].stock < 1) {
-        alert("Remera no disponible, sin stock momentaneamente");  
-      } else {
-        
-        agregarCarrito(arrayProductos[prenda],arrayCarrito);
+function crearProductos() {
+    arrayProducts.push(product1)
+    arrayProducts.push(product2)
+    arrayProducts.push(product3)
+    console.log(arrayProducts);
+}
 
-        alert("Remera agregada al carrito");
-        console.log("Remera agregada al carrito");
-      }
-      console.log(arrayCarrito);
-  
+crearProductos()
+
+for (let index = 0; index < arrayProducts.length; index++) {
+    console.log(arrayProducts[index].name, arrayProducts[index].price, arrayProducts[index].stock)
+}
+
+
+function añadirAlCarrito(prenda, cantidad) {
+    let indexProduct = arrayProducts.findIndex(object => {
+        return object.name === prenda;
+    })
+    let producto = arrayProducts[indexProduct].name
+    let precio = arrayProducts[indexProduct].price * cantidad
+    let productToAdd = new ToCart(producto, precio)
+    switch (prenda) {
+        case "remera":
+            if (cantidad > arrayProducts[indexProduct].stock) {
+                console.log("stock de remeras insuficiente")
+            } else {
+                
+                arrayCarts.push(productToAdd)
+                console.log(`añadiste ${cantidad} remeras al carrito`)
+            }
+            break;
+
+        case "pantalon":
+
+            if (cantidad > arrayProducts[indexProduct].stock) {
+                console.log("stock de pantalones insuficiente")
+            } else {
+                arrayCarts.push(productToAdd)
+                console.log(`añadiste ${cantidad} pantalon al carrito`)
+            }
+            break;
+
+        case "campera":
+
+            if (cantidad > arrayProducts[indexProduct].stock) {
+                console.log("stock de camperas insuficiente")
+            } else {
+                arrayCarts.push(productToAdd)
+                console.log(`añadiste ${cantidad} camperas al carrito`)
+            }
+            break;
+
+        default:
+            alert("no se encontro el producto")
+            añadirAlCarrito(prenda, cantidad)
     
-      break;
-    case 1:
-      if (arrayProductos[prenda].stock < 1) {
-        alert("Pantalon no disponible, sin stock momentaneamente");  
-      } else {
-        
-        agregarCarrito(arrayProductos[prenda],arrayCarrito);
-        
-        alert("Pantalon agregado al carrito");
-        console.log("Pantalon agregado al carrito");
-      }
-      console.log(arrayCarrito);
-      
-      break;
-    case 2:
-      
-      if (arrayProductos[prenda].stock < 1) {
-        alert("Campera no disponible, sin stock momentaneamente");  
-      } else {
-        
-        agregarCarrito(arrayProductos[prenda],arrayCarrito);
-        
-        alert("Campera agregada al carrito");
-        console.log("Campera agregada al carrito");
-      }
-      console.log(arrayCarrito);
-      
-      break;
-    default:
-        alert("error de producto")
-      break;
-  }
-}
-
-function agregarCarrito(objeto,arrayCarrito) {
-
-  let n =objeto.nombre
-  let p =objeto.precio;
-  const a = new Carrito(n,p);
-  arrayCarrito.push(a);
-}
-
-function calculaCompra(){
-  let monto=0;
-    for (let index = 0; index < arrayCarrito.length; index++) {
-      monto+= arrayCarrito[index].precio;
     }
-    return monto;
+
+}
+
+añadirAlCarrito("remera", 5)
+añadirAlCarrito("pantalon", 5)
+añadirAlCarrito("campera", 5)
+console.log(arrayCarts);
+
+function calcularCompra() {
+    let monto = 0
+    for (let index = 0; index < arrayCarts.length; index++) {
+        monto+= arrayCarts[index].price        
+    }
+    return monto
 }
 
 function finalizar() {
-
     console.log("Los productos del carrito son:");
-    for (let index = 0; index < arrayCarrito.length; index++) {
-      console.log("-"+arrayCarrito[index].nombre)
-    } 
-    alert(`El total de su compra es: $${(calculaCompra().toFixed(2))}`);  
+    for (let index = 0; index < arrayCarts.length; index++) {
+        console.log("-" + arrayCarts[index].name)        
+    }
+    alert(`El total de la compra es de $${calcularCompra().toFixed(2)}`)
 }
 
+calcularCompra()
+finalizar()
 
